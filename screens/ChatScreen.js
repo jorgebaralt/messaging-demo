@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { getRandomGIF } from '../api';
 
 let willFocusSubscription;
-let backPressSubscriptions;
+let willBlurSubscriptions;
 
 class ChatScreen extends Component {
 	static navigationOptions = {
@@ -76,6 +76,7 @@ class ChatScreen extends Component {
 
 	componentWillUnmount() {
 		willBlurSubscriptions.remove();
+		willFocusSubscription.remove();
 	}
 
 	headerRightIcon = () => (
