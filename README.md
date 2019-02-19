@@ -1,6 +1,6 @@
 # messaging-demo
 
-![](char-demo.gif)
+![](chat-demo.gif)
 
 ## requirements
 
