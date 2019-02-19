@@ -47,7 +47,7 @@ class ChatScreen extends Component {
 							avatarRef,
 						}
 					);
-				}, 10000);
+				}, 20000);
 				setTimeout(() => {
 					this.interval2 = window.setInterval(() => {
 						const avatarRef =
@@ -59,7 +59,7 @@ class ChatScreen extends Component {
 								avatarRef,
 							}
 						);
-					}, 20000);
+					}, 30000);
 				}, 10000);
 			}
 		);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Animated, View, TouchableHighlight } from 'react-native';
+import { colors } from '../shared/styles';
 
 class FadeImage extends Component {
 	state = { fadeAnimation: new Animated.Value(0) };
@@ -16,7 +17,7 @@ class FadeImage extends Component {
 		const imageContainerStyle = {
 			width,
 			height,
-			backgroundColor: '#EEEEEE',
+			backgroundColor: colors.white,
 			overflow: 'hidden',
 			borderRadius: this.props.circle ? width / 2 : null,
 		};
