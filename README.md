@@ -1,5 +1,7 @@
 # messaging-demo
 
+![](char-demo.gif)
+
 ## requirements
 
 Expo is the easiest way to start building a new React Native application. It allows you to start a project without installing or configuring any tools to build native code - no Xcode or Android Studio installation required (see Caveats).
