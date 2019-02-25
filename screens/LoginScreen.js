@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class LoginScreen extends Component {
-	static navigationOptions = {
-		tabBarVisible: false,
-	};
-
 	state = { loaded: false, messages: [], username: '' };
 
 	async componentWillMount() {

@@ -26,17 +26,20 @@ const ChatNav = createStackNavigator(
 	},
 	{
 		headerMode: 'none',
+	}
+);
 
-		navigationOptions: {
+const RootNavigation = createBottomTabNavigator(
+	{
+		login: { screen: LoginScreen },
+		chat: { screen: ChatNav },
+	},
+	{
+		defaultNavigationOptions: {
 			tabBarVisible: false,
 		},
 	}
 );
-
-const RootNavigation = createBottomTabNavigator({
-	login: { screen: LoginScreen },
-	chat: { screen: ChatNav },
-});
 
 const Root = createAppContainer(RootNavigation);
 

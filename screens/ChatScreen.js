@@ -18,10 +18,6 @@ let willFocusSubscription;
 let willBlurSubscriptions;
 
 class ChatScreen extends Component {
-	static navigationOptions = {
-		tabBarVisible: false,
-	};
-
 	state = { messageHeigth: 50, messages: [], currentMessage: '', gif: null };
 
 	componentWillMount() {
@@ -88,7 +84,7 @@ class ChatScreen extends Component {
 		/>
 	);
 
-	//Handles size of message text view
+	// called on content size changed of the text field message
 	updateSize = (messageHeigth) => {
 		if (messageHeigth > 20) {
 			this.setState({
@@ -104,17 +100,20 @@ class ChatScreen extends Component {
 		if (text.includes('/giphy')) {
 			gif = await getRandomGIF();
 		}
-		this.setState((prevState) => {
+		await this.setState((prevState) => {
 			const id = prevState.messages.length.toString();
 			const oldMessages = prevState.messages;
 			const timestamp = new Date();
 			const newMessages = oldMessages;
 			newMessages.push({ text, username, avatarRef, timestamp, id, gif });
+			// update messages state, and reset the height of the message text field
 			return { messages: newMessages, messageHeigth: 50 };
 		});
-		this.scrollRef.scrollToEnd();
+
+		setTimeout(() => this.scrollRef.scrollToEnd(), 50);
 	};
 
+	//render each message
 	renderMessage = (message, i) => {
 		const { messages } = this.state;
 		let collapse = false;
@@ -147,7 +146,7 @@ class ChatScreen extends Component {
 							}}
 							contentContainerStyle={{
 								padding: 20,
-								paddingBottom: 80,
+								paddingBottom: 40,
 							}}
 						>
 							{/* If there are no messages, show empty message */}
@@ -188,6 +187,14 @@ class ChatScreen extends Component {
 									onChangeText={(currentMessage) =>
 										this.setState({ currentMessage })
 									}
+									onFocus={() => {
+										this.scrollRef.scrollToEnd();
+									}}
+									onBlur={() => {
+										setTimeout(() => {
+											this.scrollRef.scrollToEnd();
+										}, 250);
+									}}
 								/>
 								<Button
 									style={styles.buttonStyle}
