@@ -193,7 +193,7 @@ class ChatScreen extends Component {
 									onBlur={() => {
 										setTimeout(() => {
 											this.scrollRef.scrollToEnd();
-										}, 250);
+										}, 10);
 									}}
 								/>
 								<Button
@@ -205,6 +205,9 @@ class ChatScreen extends Component {
 										);
 										this.setState({ currentMessage: '' });
 									}}
+									disabled={
+										this.state.currentMessage.length < 1
+									}
 								>
 									<Text style={styles.buttonTextStyle}>
 										SEND
