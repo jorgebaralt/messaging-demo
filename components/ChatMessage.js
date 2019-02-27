@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import { FadeImage } from './FadeImage';
 import { getAvatar } from '../shared/helpers/getAvatar';
 import { colors } from '../shared/styles';
@@ -17,62 +17,82 @@ export const ChatMessage = ({ message, collapse, gif }) => {
 	// check if we should collapse text
 	if (collapse) {
 		return (
-			<View style={{ marginLeft: 55 }}>
-				{gif ? (
-					<FadeImage
-						uri={gif}
-						style={{ height: 200, width: 'auto' }}
-					/>
-				) : (
-					<Text>{message.text}</Text>
-				)}
-			</View>
+			<TouchableHighlight
+				onPress={() => console.log(message.id + 'Pressed')}
+				style={{ marginLeft: 55 }}
+			>
+				<View style={{ backgroundColor: colors.white }}>
+					{gif ? (
+						<FadeImage
+							uri={gif}
+							style={{ height: 200, width: 'auto' }}
+						/>
+					) : (
+						<Text>{message.text}</Text>
+					)}
+				</View>
+			</TouchableHighlight>
 		);
 	}
 	// Show separate message
 	return (
-		<View style={{ marginTop: 10 }}>
-			<View style={{ flex: 1, flexDirection: 'row' }}>
-				<FadeImage
-					image={getAvatar(message.avatarRef)}
-					style={{ width: 50, height: 50 }}
-				/>
-				<Text
+		<TouchableHighlight
+			onPress={() => console.log(message.id + 'Pressed')}
+			style={{ marginTop: 10, backgroundColor: colors.lightGray }}
+		>
+			<View style={{ backgroundColor: colors.white }}>
+				<View
 					style={{
-						marginLeft: 5,
-						fontSize: 16,
-						fontWeight: '500',
-						color: colors.black,
+						flex: 1,
+						flexDirection: 'row',
 					}}
 				>
-					{message.username}
-				</Text>
-				<Text
-					style={{
-						marginLeft: 5,
-						fontSize: 14,
-						color: colors.darkGray,
-					}}
-				>
-					{time}
-				</Text>
+					<FadeImage
+						image={getAvatar(message.avatarRef)}
+						style={{ width: 50, height: 50 }}
+					/>
+					<Text
+						style={{
+							marginLeft: 5,
+							fontSize: 16,
+							fontWeight: '500',
+							color: colors.black,
+						}}
+					>
+						{message.username}
+					</Text>
+					<Text
+						style={{
+							marginLeft: 5,
+							fontSize: 14,
+							color: colors.darkGray,
+						}}
+					>
+						{time}
+					</Text>
+				</View>
+				{/* if there is a gif, render it, otherwise render text */}
+				{gif ? (
+					<FadeImage
+						uri={gif}
+						style={{
+							marginLeft: 55,
+							height: 200,
+							width: 'auto',
+							marginTop: -20,
+						}}
+					/>
+				) : (
+					<Text
+						style={{
+							marginLeft: 55,
+							marginTop: -20,
+						}}
+					>
+						{message.text}
+					</Text>
+				)}
 			</View>
-			{/* if there is a gif, render it, otherwise render text */}
-			{gif ? (
-				<FadeImage
-					uri={gif}
-					style={{
-						marginLeft: 55,
-						height: 200,
-						width: 'auto',
-						marginTop: -20,
-					}}
-				/>
-			) : (
-				<Text style={{ marginLeft: 55, marginTop: -20 }}>
-					{message.text}
-				</Text>
-			)}
-		</View>
+		</TouchableHighlight>
 	);
 };

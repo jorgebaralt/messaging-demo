@@ -29,7 +29,9 @@ export const getCurrentUser = () => async (dispatch) => {
 };
 
 export const userLogout = () => async (dispatch) => {
+	//clean up async
 	await AsyncStorage.setItem('username', '');
 	await AsyncStorage.setItem('avatarRef', '');
+	// dispatch to clean app state
 	return dispatch({ type: USER_LOGOUT });
 };
